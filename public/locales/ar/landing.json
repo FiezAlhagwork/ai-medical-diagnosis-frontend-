@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "your_healthy_future_starts_here": "مستقبلك الصحي يبدأ هنا",
+    "Medical_advice": "استشارة طبية",
+    "With_the_touch_of_a_button": "بلمسة زر واحدة",
+    "Let_artificial_intelligence": "دع الذكاء الاصطناعي يحلل أعراضك ويوجهك لأفضل الأطباء المختصين.",
+    "I_looked_for_a_doctor": "بحثت عن طبيب",
+    "Start_diagnosis": "ابدأ التشخيص",
+    "over_patients": "أكثر من  <strong>+10,000</strong> مريض يثقون بنا",
+    "Your_health_is_our_priority": "صحتك أولويتنا وخطوتك الأولى نحو حياة أفضل تبدأ من هون",
+    "Find_the_right_specialist_for_you": "اعثر على الأخصائي المناسب لك بسهولة وسرعة",
+    "Certified_doctors": "أطباء معتمدون",
+    "Available_now": "متاح الان",
+    "Service_evaluation": "تقييم الخدمة",
+    "Excellent": "ممتاز 4.9/5"
+  },
+  "stats": {
+    "registered_patient": "مريض مسجل",
+    "successful_consultation": "استشارة ناجح",
+    "medical_partner": "شريك طبي",
+    "expert_doctor": "طبيب خبير"
+  },
+  "medicalSolutions": {
+    "book_appointments": "حجز المواعيد",
+    "remote_medical_consultation": "استشارة طبية عن بعد",
+    "smart_assistant": "المساعد الذكي",
+    "electronic_medical_record": "السجل الطبي الإلكتروني",
+    "speak_to_your_doctor": "(قريبا) تحدث مع طبيبك صوت وصورة بخصوصية تامة ومن منزلك.",
+    "browse_doctors": "(قريبا) تصفح جداول الأطباء واحجز الموعد المناسب لك بضغطة زر.",
+    "analyze_your_test_results": "حلل نتائج تحاليلك واستقبل نصائح فورية عبر الشات الذكي.",
+    "medical_history": "احتفظ بتاريخك المرضي وصفاتك الطبية في مكان آمن.",
+    "integrated_medical_solutions": "حلول طبية متكاملة ",
+    "find_out_more":"اكتشف المزيد"
+  },
+  "browse_by_specialty": {
+    "browse_by_specialty": "تصفح حسب التخصص",
+    "cardiology": "طب القلب",
+    "pediatrics": "طب الاسنان",
+    "skin_diseases": "الامراض الجلدية",
+    "ears_and_nose": "الاذن و الانف",
+    "dentistry": "طب الاسنان",
+    "ophthalmology": "طب العيون",
+    "bones_and_joints": "العظام والمفاصل ",
+    "neurology": "طب الاعصاب ",
+    "browse_doctors": "تصفح الأطباء"
+  },
+  "our_distinguished_doctors": {
+    "our_distinguished_doctors": "أطباؤنا المميزون"
+
+
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "title": "My Profile",
+    "personalInfo": "Personal Information",
+    "diagnosisHistory": "Diagnosis History",
+    "settings": "Settings",
+    "editProfile": "Edit Profile",
+    "changePassword": "Change Password",
+    "notifications": "Notifications",
+    "language": "Language",
+    "theme": "Theme",
+    "noDiagnoses": "No diagnosis history yet",
+    "phone":"phone",
+    "email":"Email",
+    "location":"location",
+    "date":"date"
+
+
+}

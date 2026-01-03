@@ -1,0 +1,16 @@
+{
+  "title": "ملفي الشخصي",
+  "personalInfo": "المعلومات الشخصية",
+  "diagnosisHistory": "سجل التشخيصات",
+  "settings": "الإعدادات",
+  "editProfile": "تعديل الملف",
+  "changePassword": "تغيير كلمة المرور",
+  "notifications": "الإشعارات",
+  "language": "اللغة",
+  "theme": "المظهر",
+  "noDiagnoses": "لا يوجد سجل تشخيصات بعد",
+  "phone": "رقم الهاتف",
+  "email": "البريد الالكتروني",
+  "location": "الموقع",
+  "date": "تاريخ الميلاد"
+}

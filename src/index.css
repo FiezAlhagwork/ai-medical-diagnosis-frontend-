@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+
+@import "tailwindcss";
+
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@theme {
+  --font-ar : "poppins", "cairo", sans-serif;
+  --font-en : "inter", sans-serif;
+  --breakpoint-3xl: 1920px;
+  --color-primary: #048cff;
+  --color-primary-200: rgba(195, 221, 253, 0.2); ;
+}
+.blob {
+  aspect-ratio: 1;
+  clip-path: shape(from 30.62% 8.11%,curve to 46.74% 4.56% with 38.84% 6.52%,curve to 62.85% 4.34% with 54.65% 2.60%,curve to 75.89% 12.98% with 71.05% 6.07%,curve to 86.00% 25.59% with 80.74% 19.89%,curve to 94.31% 38.82% with 91.26% 31.28%,curve to 97.56% 54.85% with 97.36% 46.36%,curve to 91.34% 69.16% with 97.77% 63.34%,curve to 81.50% 83.01% with 84.91% 74.99%,curve to 69.83% 93.02% with 78.10% 91.04%,curve to 53.72% 93.45% with 61.55% 95.00%,curve to 38.52% 90.62% with 45.89% 91.89%,curve to 24.64% 85.28% with 31.15% 89.34%,curve to 12.77% 75.27% with 18.12% 81.22%,curve to 5.36% 61.45% with 7.42% 69.32%,curve to 5.52% 45.89% with 3.31% 53.59%,curve to 10.26% 30.78% with 7.72% 38.20%,curve to 17.60% 16.53% with 12.80% 23.37%,curve to 30.62% 8.11% with 22.40% 9.70%);
+  background-color: #048cff ;
+}
+
+
+.container_custom {
+  width: 100%;
+  max-width: 1120px; /* شبيه بـ container في Tailwind عند 2xl */
+  margin-inline: auto; /* بدل margin-left/right يدعم RTL */
+  padding-inline: 1rem; /* مسافة داخلية من الطرفين */
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .container_custom {
+    padding-inline: 1.25rem; /* sm */
+  }
+}
+
+@media (min-width: 768px) {
+  .container_custom {
+    padding-inline: 1.5rem; /* md */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container_custom {
+    padding-inline: 2rem; /* lg */
+  }
+}
+
+@media (min-width: 1280px) {
+  .container_custom {
+    padding-inline: 2rem; /* xl */
+  }
+}
+
+@media (min-width: 1536px) {
+  .container_custom {
+    padding-inline: 2rem; /* 2xl */
+    max-width: 1400px; /* مثل tailwind 2xl */
+  }
+}
+
+.input-box {
+  @apply w-full flex justify-between gap-3 text-black bg-slate-100/50  rounded  mb-3 px-4 py-3  outline-none;
+}
+
+.select-box {
+  @apply w-full flex justify-between gap-3 text-black bg-slate-100/50  rounded  mb-3   outline-none;
+}
+
+.btn{
+  @apply w-full font-medium  shadow-lg   rounded-md;
+}
+
+
+
+
+
+
+
+.bg-primary-200\/20 {
+    background-color: rgba(195, 221, 253, 0.2);
+}

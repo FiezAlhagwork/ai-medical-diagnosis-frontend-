@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "your_healthy_future_starts_here": "Your healthy future starts here",
+    "Medical_advice": "Medical advice",
+    "With_the_touch_of_a_button": "With the touch of a button",
+    "Let_artificial_intelligence": "Let AI analyze your symptoms and direct you to the best specialist doctors",
+    "I_looked_for_a_doctor": "search for Doctor",
+    "Start_diagnosis": "Start diagnosis",
+    "over_patients": "Over <strong>+10,000</strong> patients trust us",
+    "Certified_doctors": "Certified doctors",
+    "Available_now": "Available Now",
+    "Service_evaluation": "Service evaluation",
+    "Excellent": "4.9/5 Excellent"
+  },
+
+  "stats": {
+    "registered_patient": "Registered patient",
+    "successful_consultation": "Successful consultation",
+    "medical_partner": "Medical partner",
+    "expert_doctor": "Expert doctor"
+  },
+  "medicalSolutions": {
+    "book_appointments": "Book appointments",
+    "remote_medical_consultation": "Remote medical consultation",
+    "smart_assistant": "Smart assistant",
+    "electronic_medical_record": "Electronic medical record",
+    "speak_to_your_doctor": "speak to your doctor via audio and video in complete privacy from the comfort of your home (Soon).",
+    "browse_doctors": "Browse doctors' schedules and book the appointment that suits you with the click of a button (Soon) .",
+    "analyze_your_test_results": "Analyze your test results and receive instant advice via smart chat.",
+    "medical_history": "Keep your medical history and prescriptions in a safe place.",
+    "integrated_medical_solutions": " medical solutions",
+    "find_out_more":"Find out more"
+  },
+  "browse_by_specialty": {
+    "browse_by_specialty": "Browse by specialty",
+    "cardiology": "cardiology",
+    "pediatrics": "pediatrics",
+    "skin_diseases": "Skin diseases",
+    "ears_and_nose": "Ears and nose",
+    "dentistry": "dentistry",
+    "ophthalmology": "ophthalmology",
+    "bones_and_joints": "Bones and joints",
+    "neurology": "Neurology",
+    "browse_doctors": "Browse doctors"
+  },
+  "our_distinguished_doctors": {
+    "our_distinguished_doctors": "Our distinguished doctors"
+
+
+  }
+}
