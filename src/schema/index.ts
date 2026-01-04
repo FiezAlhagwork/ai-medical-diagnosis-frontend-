@@ -32,7 +32,7 @@ export const signUpSchema = baseSignUpSchema.refine(
 
 export type SignUpSchema = z.infer<typeof signUpSchema>;
 
-export const symptomsSchema = z.object({
+export const SymptomsSchema = z.object({
   symptomsText: z
     .string("")
     .min(10, "يرجى كتابة وصف أوضح للأعراض")
@@ -49,6 +49,6 @@ export const symptomsSchema = z.object({
   }),
 });
 
-export type symptomsType  = z.infer<typeof symptomsSchema>;
+export type SymptomsType  = z.infer<typeof symptomsSchema>;
 
 
