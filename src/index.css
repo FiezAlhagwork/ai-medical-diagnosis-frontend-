@@ -71,11 +71,6 @@
   @apply w-full flex justify-between gap-3 text-black bg-slate-100/50  rounded  mb-3   outline-none;
 }
 
-.btn{
-  @apply w-full font-medium  shadow-lg   rounded-md;
-}
-
-
 
 
 
