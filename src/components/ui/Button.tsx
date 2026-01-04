@@ -7,7 +7,7 @@ const variants = {
   `,
 
   outline: `
-    border border-primary  text-primary
+      text-primary
     hover:bg-primary hover:text-white bg-white
   `,
 };
@@ -26,7 +26,7 @@ const Button = ({
       disabled={isLoading || props.disabled}
       // ${isLoading ? "bg-blue-400" : "bg-primary"}
       className={`
-        w-full font-medium p-2.5  shadow-md rounded-md text-md flex gap-4 items-center justify-center capitalize duration-75 transition-all 
+        w-full font-medium p-2.5 shadow-sm rounded-md text-md flex gap-4 items-center justify-center capitalize transition-color duration-150 
         ${variants[variant]}
         ${props.disabled
           ? "opacity-50 cursor-not-allowed"
