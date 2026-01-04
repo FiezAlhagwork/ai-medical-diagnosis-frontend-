@@ -105,3 +105,6 @@ export type DoctorStatProps = {
   bgColor:string ,
   textColor: string,
 }
+
+
+export type Lang = "ar" | "en";
