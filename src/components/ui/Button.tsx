@@ -2,14 +2,13 @@ import type { ButtonProps } from "../../types";
 
 const variants = {
   primary: `
-    bg-primary text-white p-2.5  
+    bg-primary text-white 
     hover:bg-blue-800 hover:text-white
   `,
 
   outline: `
-    border-2 border-primary p-1 text-primary
-    hover:bg-primary hover:text-white
-    duration-75 transition-all shadow-lg
+    border border-primary  text-primary
+    hover:bg-primary hover:text-white bg-white
   `,
 };
 
@@ -27,12 +26,11 @@ const Button = ({
       disabled={isLoading || props.disabled}
       // ${isLoading ? "bg-blue-400" : "bg-primary"}
       className={`
-        btn text-md flex gap-4 items-center justify-center capitalize
+        w-full font-medium p-2.5  shadow-md rounded-md text-md flex gap-4 items-center justify-center capitalize duration-75 transition-all 
         ${variants[variant]}
-        ${
-          props.disabled
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-blue-800 hover:text-white"
+        ${props.disabled
+          ? "opacity-50 cursor-not-allowed"
+          : "hover:bg-blue-800 hover:text-white"
         }
         ${classNameButton || ""}
       `}
