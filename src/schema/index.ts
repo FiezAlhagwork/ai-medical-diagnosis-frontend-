@@ -44,11 +44,9 @@ export const SymptomsSchema = z.object({
       error: "مدة الأعراض مطلوبة",
     }
   ),
-  severity: z.enum(["خفيف", "متوسط", "شديد"], {
+  severity: z.enum(["low", "medium", "high"], {
     error: "يرجى اختيار شدة الأعراض",
   }),
 });
 
-export type SymptomsType  = z.infer<typeof symptomsSchema>;
-
-
+export type SymptomsType = z.infer<typeof SymptomsSchema>;

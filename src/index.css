@@ -71,6 +71,9 @@
   @apply w-full flex justify-between gap-3 text-black bg-slate-100/50  rounded  mb-3   outline-none;
 }
 
+.glass {
+  @apply py-4 px-3 bg-[#f1f5f9]/30 border border-gray-200  rounded-xl  backdrop-blur-md p-8 shadow-xl
+}
 
 
 

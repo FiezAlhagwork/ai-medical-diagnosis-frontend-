@@ -8,6 +8,7 @@ import type {
   UseFormRegisterReturn,
 } from "react-hook-form";
 import type { IconType } from "react-icons/lib";
+import type { DURATIONS, SEVERITIES } from "../constant";
 
 export type TextFieldProps = {
   label: string;
@@ -96,15 +97,41 @@ export type DoctorCardProps = {
   item: Doctor;
 };
 
-
 export type DoctorStatProps = {
-  id?:string ,
-  label:string ,
-  value: string ,
-  Icon: IconType,
-  bgColor:string ,
-  textColor: string,
-}
-
+  id?: string;
+  label: string;
+  value: string;
+  Icon: IconType;
+  bgColor: string;
+  textColor: string;
+};
 
 export type Lang = "ar" | "en";
+
+export type SymptomsTextareaProps = {
+  register: UseFormRegisterReturn;
+  errors?: FieldError;
+  symptomsText: string;
+};
+
+export type QuickSymptomsSelectorProps = {
+  value: string[];
+  onToggle: (id: string) => void;
+  errors: Merge<FieldError, (FieldError | undefined)[]> | undefined;
+};
+
+export type Duration = (typeof DURATIONS)[number];
+
+export type DurationSelectorProps = {
+  value: Duration;
+  onSelect: (val: Duration) => void;
+  errors: Merge<FieldError, (FieldError | undefined)[]> | undefined;
+  lang: Lang;
+};
+
+export type Severity = (typeof SEVERITIES)[number];
+export type SeveritySelectorProps = {
+  value?: Severity;
+  onSelect: (val: Severity) => void;
+  errors: Merge<FieldError, (FieldError | undefined)[]> | undefined;
+};
