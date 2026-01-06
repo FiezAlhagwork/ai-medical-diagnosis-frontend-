@@ -11,7 +11,9 @@
     "durationHint": "Choose how long you’ve been experiencing this symptom, from when it started until now.",
     "severityLabel": "Severity",
     "severityHint": "Rate how severe the symptom feels and how much it affects your daily activities.",
-    "submit": "Submit Symptoms"
+    "submit": "Submit Symptoms",
+    "cancel":"cancel"
+
   },
 
   "severity": {

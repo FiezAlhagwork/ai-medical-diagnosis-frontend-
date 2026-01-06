@@ -7,8 +7,7 @@ const variants = {
   `,
 
   outline: `
-      text-primary
-    hover:bg-primary hover:text-white bg-white
+      text-primary hover:bg-blue-200 hover:text-primary bg-white
   `,
 };
 
@@ -30,7 +29,7 @@ const Button = ({
         ${variants[variant]}
         ${props.disabled
           ? "opacity-50 cursor-not-allowed"
-          : "hover:bg-blue-800 hover:text-white"
+          : ""
         }
         ${classNameButton || ""}
       `}

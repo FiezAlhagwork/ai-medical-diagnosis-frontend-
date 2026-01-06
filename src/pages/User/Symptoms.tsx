@@ -9,6 +9,7 @@ import SymptomsTextarea from "../../components/symptoms/SymptomsTextarea";
 import QuickSymptomsSelector from "../../components/symptoms/QuickSymptomsSelector";
 import DurationSelector from "../../components/symptoms/DurationSelector";
 import SeveritySelector from "../../components/symptoms/SeveritySelector";
+import Button from "../../components/ui/Button";
 
 
 
@@ -47,7 +48,7 @@ const SymptomsPage = () => {
 
 
   return (
-    <main className=" mt-36 mb-10 font-sans " >
+    <main className=" mt-36 mb-10  " >
       <div className="container_custom ">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -59,18 +60,26 @@ const SymptomsPage = () => {
           <QuickSymptomsSelector value={selectedSymptoms} onToggle={toggleQuickSymptom} errors={errors.quickSymptoms} />
 
 
-          <div className="flex flex-col md:flex-row gap-4 mt-6" >
+          <div className="flex flex-col md:flex-row gap-4 mt-6 mb-8 " >
             <DurationSelector value={selectedDuration} onSelect={(v) => setValue("duration", v, { shouldValidate: true, shouldDirty: true, })} errors={errors.duration} lang={lang} />
 
             <SeveritySelector value={selectedSeverity} onSelect={(v) => setValue("severity", v, { shouldValidate: true, shouldDirty: true })} errors={errors.severity} />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition mt-10"
-          >
-            {t("symptoms.submit")}
-          </button>
+          <div className="flex items-center gap-4">
+
+            <Button
+              type="submit"       >
+              {t("symptoms.submit")}
+            </Button>
+
+            <Button
+              type="button"
+              variant="outline" classNameButton="border border-primary"          >
+              {t("symptoms.cancel")}
+            </Button>
+
+          </div>
         </form>
       </div >
     </main >
