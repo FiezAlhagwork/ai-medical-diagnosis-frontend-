@@ -25,7 +25,7 @@ const Button = ({
       disabled={isLoading || props.disabled}
       // ${isLoading ? "bg-blue-400" : "bg-primary"}
       className={`
-        w-full font-medium p-2.5 shadow-sm rounded-md text-md flex gap-4 items-center justify-center capitalize transition-color duration-150 
+        w-full font-medium p-2.5 shadow-sm rounded-md text-md flex gap-2 items-center justify-center capitalize transition-color duration-150 
         ${variants[variant]}
         ${props.disabled
           ? "opacity-50 cursor-not-allowed"
