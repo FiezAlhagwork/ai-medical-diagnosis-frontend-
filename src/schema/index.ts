@@ -2,7 +2,9 @@ import { z } from "zod";
 // import { fi } from "zod/locales";
 
 export const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(/^\+9639\d{8}$/, {
+    message: "Phone number must be in international format (e.g. +9639XXXXXXX)",
+  }),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 

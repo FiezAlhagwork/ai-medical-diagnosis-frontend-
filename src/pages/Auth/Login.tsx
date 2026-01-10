@@ -18,7 +18,7 @@ const Login = () => {
   });
   const { t } = useTranslation("auth");
 
-  const onSubmit = (data:LoginSchema) => {
+  const onSubmit = (data: LoginSchema) => {
     console.log("LOGIN DATA:", data);
   };
 
@@ -33,11 +33,11 @@ const Login = () => {
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            label={t("auth.email")}
-            type="text"
-            placeholder="example@example.com"
-            error={errors.email}
-            registration={register("email")}
+            label={t("auth.PhoneNumber")}
+            type="tel"
+            placeholder="+9639XXXXXXXX"
+            error={errors.phone}
+            registration={register("phone")}
           />
           <TextField
             label={t("auth.password")}
