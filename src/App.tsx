@@ -10,6 +10,10 @@ import DoctorProfile from "./pages/User/DoctorProfile";
 import Diagnosis from "./pages/User/Diagnosis";
 import Layout from "./components/layouts/Layout";
 import Landing from "./pages/User/Landing";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import ManageDoctor from "./pages/Admin/ManageDoctor";
+import ManageUser from "./pages/Admin/ManageUser";
 
 function App() {
   return (
@@ -20,16 +24,28 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
 
           {/* Users Routes */}
-          {/* <Route element={<ProtectedRoute />}> */}
           <Route element={<Layout />}>
             <Route path="/" element={<Landing />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/symptoms" element={<Symptoms />} />
-            <Route path="/doctors" element={<Doctors />} />
-            <Route path="/doctor/:id" element={<DoctorProfile />} />
-            <Route path="/diagnosis" element={<Diagnosis />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/symptoms" element={<Symptoms />} />
+              <Route path="/doctors" element={<Doctors />} />
+              <Route path="/doctor/:id" element={<DoctorProfile />} />
+              <Route path="/diagnosis" element={<Diagnosis />} />
+            </Route>
           </Route>
-          {/* </Route> */}
+
+          <Route element={<ProtectedRoute role="admin"/>}>
+            <Route path="/admin" element={<AdminDashboard />}>
+              <Route path="manageDoctor" element={<ManageDoctor />} />
+              <Route path="manageUser" element={<ManageUser />} />
+            </Route>
+          </Route>
+
+
+
+
+
         </Routes>
       </Router>
     </div>
