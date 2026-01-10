@@ -8,14 +8,18 @@ import { signUpSchema, type SignUpSchema } from "../../schema";
 import type { Options } from "../../types";
 import SelectField from "../../components/ui/SelectField";
 import Button from "../../components/ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../../services/auth";
+import type { RegisterPayload } from "../../types/auth";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation("auth");
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
+    setError
   } = useForm({
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
@@ -26,8 +30,36 @@ const SignUp = () => {
     { value: "أنثى", label: t("auth.gender_female") },
   ];
 
-  const onSubmit = (data: SignUpSchema) => {
-    console.log("SignUp DATA:", data);
+  const onSubmit = async (data: SignUpSchema) => {
+    try {
+      const payload: RegisterPayload = {
+        name: `${data.firstName}  ${data.lastName}`,
+        email: data.email || "",
+        password: data.password,
+        age: data.age,
+        city: data.city,
+        province: data.province,
+        gender: data.gender,
+        phone: data.phone
+
+      }
+      const res = await registerUser(payload)
+      if (res.user && res.user.token) {
+        localStorage.setItem("token", res.user.token);
+        localStorage.setItem("role", res.user.role);
+        navigate("/profile")
+      }
+    } catch (error) {
+      const message =
+        error?.response?.data?.message || "Something went wrong";
+
+      // عرض الرسالة على مستوى root form
+      setError("root", {
+        type: "server",
+        message,
+      });
+    }
+
   };
 
   return (
@@ -126,6 +158,8 @@ const SignUp = () => {
               {t("auth.login")}
             </Link>
           </p>
+          {errors.root && <p className="text-xs text-red-500 mt-2">{errors.root?.message}</p>}
+
         </form>
         <ToggleButton />
       </div>

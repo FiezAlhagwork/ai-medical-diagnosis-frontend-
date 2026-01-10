@@ -4,22 +4,47 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginSchema } from "../../schema";
 import { useTranslation } from "react-i18next";
 import TextField from "../../components/ui/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
+import { loginUser } from "../../services/auth";
 
 const Login = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
+    setError
   } = useForm({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
   });
   const { t } = useTranslation("auth");
 
-  const onSubmit = (data: LoginSchema) => {
-    console.log("LOGIN DATA:", data);
+  const onSubmit = async (data: LoginSchema) => {
+    try {
+      const res = await loginUser(data)
+
+      if (res.user && res.user.token) {
+        localStorage.setItem("token", res.user.token);
+        localStorage.setItem("role", res.user.role);
+
+        
+        if (res.user.role === "admin") {
+          navigate("/admin");
+        }
+        else navigate("/profile");
+      }
+    } catch (error) {
+      const message =
+        error?.response?.data?.message || "Something went wrong";
+
+      // عرض الرسالة على مستوى root form
+      setError("root", {
+        type: "server",
+        message,
+      });
+    }
   };
 
   return (
@@ -59,9 +84,9 @@ const Login = () => {
               {t("auth.createAccount")}
             </Link>
           </p>
+          {errors.root && <p className="text-xs text-red-500 mt-2">{errors.root?.message}</p>}
         </form>
       </div>
-      {/* <ToggleButton /> */}
     </AuthLayout>
   );
 };
