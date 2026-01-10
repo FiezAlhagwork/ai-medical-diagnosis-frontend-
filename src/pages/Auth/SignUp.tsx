@@ -56,6 +56,13 @@ const SignUp = () => {
               registration={register("lastName")}
             />
           </div>
+          <TextField
+            label={t("auth.PhoneNumber")}
+            type="tel"
+            placeholder="+9639XXXXXXXX"
+            registration={register("phone")}
+            error={errors.phone}
+          />
 
           <TextField
             label={t("auth.email")}
