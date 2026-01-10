@@ -16,15 +16,15 @@ const baseSignUpSchema = z.object({
   phone: z.string().regex(/^\+9639\d{8}$/, {
     message: "Phone number must be in international format (e.g. +9639XXXXXXX)",
   }),
-  email: z.string().optional(),
+  email: z.email().optional(),
   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z
     .string()
     .min(6, "Confirm password must be at least 6 characters"),
-  gender: z.enum(["ذكر", "أنثى"]).optional(),
-  age: z.coerce.number().min(1).max(120).optional(),
-  province: z.string().nonempty("province is required").optional(),
-  city: z.string().nonempty(" city is required").optional(),
+  gender: z.enum(["ذكر", "أنثى"]),
+  age: z.coerce.number().min(1).max(120),
+  province: z.string().nonempty("province is required"),
+  city: z.string().nonempty(" city is required"),
 });
 
 export const signUpSchema = baseSignUpSchema.refine(
