@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/incompatible-library */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -10,19 +11,26 @@ import QuickSymptomsSelector from "../../components/symptoms/QuickSymptomsSelect
 import DurationSelector from "../../components/symptoms/DurationSelector";
 import SeveritySelector from "../../components/symptoms/SeveritySelector";
 import Button from "../../components/ui/Button";
+import { createDiagnosis } from "../../services/Diagnosis";
+import { useNavigate } from "react-router-dom";
+import { useDiagnosis } from "../../context/DiagnosisContext";
 
 
 
 
 const SymptomsPage = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false)
   const { t, i18n } = useTranslation("symptoms");
   const lang: Lang = i18n.language.startsWith("ar") ? "ar" : "en";
+  const navigate = useNavigate()
+  const { setDiagnosis } = useDiagnosis();
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(SymptomsSchema),
@@ -35,14 +43,33 @@ const SymptomsPage = () => {
   const selectedSeverity = watch("severity");
   const symptomsText = watch("symptomsText") || ""
   /* ========================= Handlers ========================= */
+
+
   const toggleQuickSymptom = (symptom: string) => {
     const updated = selectedSymptoms.includes(symptom) ? selectedSymptoms.filter((s) => s !== symptom) : [...selectedSymptoms, symptom];
     setSelectedSymptoms(updated);
     setValue("quickSymptoms", updated, { shouldValidate: true });
   };
 
-  const onSubmit = (data: SymptomsType) => {
+  const onSubmit = async (data: SymptomsType) => {
     console.log("Symptoms Payload 👉", data);
+    try {
+      const res = await createDiagnosis(data);
+      if (res.data && !res.error) {
+        setDiagnosis(res)
+        navigate(`/diagnosis/${res.data._id}`)
+      }
+
+    } catch (error: any) {
+      const message =
+        error?.response?.data?.message || "Something went wrong";
+
+      // عرض الرسالة على مستوى root form
+      setError("root", {
+        type: "server",
+        message,
+      });
+    }
   };
 
 
@@ -80,6 +107,7 @@ const SymptomsPage = () => {
             </Button>
 
           </div>
+          {errors.root && <p className="text-red-500 text-sm">{errors.root.message}</p>}
         </form>
       </div >
     </main >

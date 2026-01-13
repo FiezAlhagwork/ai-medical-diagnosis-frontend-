@@ -1,28 +1,27 @@
-import axios from "axios"
+import axios from "axios";
 
 // const url = import.meta.env.VITE_BASE_Url
 
 const axiosInstance = axios.create({
-    baseURL:"http://localhost:5000",
-    timeout:10000,
-    headers:{
-        "Content-Type":"application/json"
-    }
-})
-
+  baseURL: "http://localhost:5000",
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 axiosInstance.interceptors.request.use(
-    (config) => {
-        const accessToken = localStorage.getItem("token")
-        if(accessToken){
-            config.headers.Authorization = `Bearer ${accessToken}`
-        }
-        return config
-    },
-
-    (error) => {
-        return Promise.reject(error)
+  (config) => {
+    const accessToken = localStorage.getItem("token");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
-)
+    return config;
+  },
 
-export default axiosInstance
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

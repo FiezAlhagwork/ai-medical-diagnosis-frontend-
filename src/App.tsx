@@ -14,41 +14,44 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import ManageDoctor from "./pages/Admin/ManageDoctor";
 import ManageUser from "./pages/Admin/ManageUser";
+import { DiagnosisProvider } from "./context/DiagnosisContext";
 
 function App() {
   return (
-    <div>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
+    <DiagnosisProvider>
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signUp" element={<SignUp />} />
 
-          {/* Users Routes */}
-          <Route element={<Layout />}>
-            <Route path="/" element={<Landing />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/symptoms" element={<Symptoms />} />
-              <Route path="/doctors" element={<Doctors />} />
-              <Route path="/doctor/:id" element={<DoctorProfile />} />
-              <Route path="/diagnosis" element={<Diagnosis />} />
+            {/* Users Routes */}
+            <Route element={<Layout />}>
+              <Route path="/" element={<Landing />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/symptoms" element={<Symptoms />} />
+                <Route path="/doctors" element={<Doctors />} />
+                <Route path="/doctor/:id" element={<DoctorProfile />} />
+                <Route path="/diagnosis/:id" element={<Diagnosis />} />
+              </Route>
             </Route>
-          </Route>
 
-          <Route element={<ProtectedRoute role="admin"/>}>
-            <Route path="/admin" element={<AdminDashboard />}>
-              <Route path="manageDoctor" element={<ManageDoctor />} />
-              <Route path="manageUser" element={<ManageUser />} />
+            <Route element={<ProtectedRoute role="admin" />}>
+              <Route path="/admin" element={<AdminDashboard />}>
+                <Route path="manageDoctor" element={<ManageDoctor />} />
+                <Route path="manageUser" element={<ManageUser />} />
+              </Route>
             </Route>
-          </Route>
 
 
 
 
 
-        </Routes>
-      </Router>
-    </div>
+          </Routes>
+        </Router>
+      </div>
+    </DiagnosisProvider>
   );
 }
 
