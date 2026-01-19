@@ -14,6 +14,9 @@ import Button from "../../components/ui/Button";
 import { createDiagnosis } from "../../services/Diagnosis";
 import { useNavigate } from "react-router-dom";
 import { useDiagnosis } from "../../context/DiagnosisContext";
+import { LuActivity } from "react-icons/lu";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 
 
@@ -22,6 +25,14 @@ const SymptomsPage = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false)
   const { t, i18n } = useTranslation("symptoms");
+  useGSAP(() => {
+    gsap.fromTo("#progress", {
+      width: 0,
+      duration: 5,
+      delay: 1,
+      ease: "back.inOut"
+    }, { width: "77%" })
+  }, [loading])
   const lang: Lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const navigate = useNavigate()
   const { setDiagnosis } = useDiagnosis();
@@ -41,7 +52,7 @@ const SymptomsPage = () => {
   });
   const selectedDuration = watch("duration");
   const selectedSeverity = watch("severity");
-  const symptomsText = watch("symptomsText") || ""
+  const symptomsText = watch("symptomsText") || "";
   /* ========================= Handlers ========================= */
 
 
@@ -52,13 +63,16 @@ const SymptomsPage = () => {
   };
 
   const onSubmit = async (data: SymptomsType) => {
-    console.log("Symptoms Payload 👉", data);
+    if (loading) return
+
     try {
+      setLoading(true)
       const res = await createDiagnosis(data);
       if (res.data && !res.error) {
         setDiagnosis(res)
         navigate(`/diagnosis/${res.data._id}`)
       }
+
 
     } catch (error: any) {
       const message =
@@ -69,8 +83,37 @@ const SymptomsPage = () => {
         type: "server",
         message,
       });
+    } finally {
+      setLoading(false)
     }
   };
+
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center gradient-hero">
+        <div
+          className="text-center"
+        >
+          <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <LuActivity className="w-10 h-10 text-primary-foreground" />
+          </div>
+          <h2 className="text-2xl font-bold   mb-2">جاري تحليل الأعراض</h2>
+          <p className=" font-semibold mb-4">يرجى الانتظار قليلًا بينما نقوم بتقييم حالتك الصحية...</p>
+
+
+          <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
+            <div
+              id="progress"
+              className="h-full bg-emerald-600 rounded-full transition-all duration-500"
+
+            />
+          </div>
+
+        </div>
+      </div>
+    );
+  }
 
 
 
