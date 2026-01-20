@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/incompatible-library */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -114,9 +113,6 @@ const SymptomsPage = () => {
       </div>
     );
   }
-
-
-
   return (
     <main className=" mt-36 mb-10  " >
       <div className="container_custom ">
