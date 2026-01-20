@@ -135,3 +135,12 @@ export type SeveritySelectorProps = {
   onSelect: (val: Severity) => void;
   errors: Merge<FieldError, (FieldError | undefined)[]> | undefined;
 };
+
+
+export type DiagnosisCardProps = {
+  _id: string,
+  possible_condition: string,
+  createdAt: string,
+  confidence: string
+
+}

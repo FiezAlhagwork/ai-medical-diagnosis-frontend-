@@ -1,0 +1,31 @@
+import Button from '../ui/Button'
+import { FaRegEdit } from "react-icons/fa";
+
+
+const ProfileCard = () => {
+    return (
+        <>
+            <h1 className="text-center text-3xl  md:text-5xl font-bold">ملفي الشخصي</h1>
+            <div className="bg-white flex flex-col md:flex-row items-center text-center  gap-4 mt-20 py-10 shadow-lg rounded-3xl">
+                <div className="w-20 h-20 rounded-full bg-linear-to-r from-cyan-500 to-blue-500 text-white flex items-center justify-center text-3xl font-bold md:ms-9">
+                    F
+                </div>
+                <div className="text-center md:text-start flex-1 md:ms-3 ">
+                    <h2 className="text-2xl  font-semibold  ">
+                        Fiez Alhag
+                    </h2>
+                    <p className=" text-gray-500">
+                        fiezalhag@gmail.com
+                    </p>
+                </div>
+                <div className="md:pe-7">
+                    <Button icon={<FaRegEdit size={22} />} variant="primary">
+                        تعديل الملف
+                    </Button>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default ProfileCard
