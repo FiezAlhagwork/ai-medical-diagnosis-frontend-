@@ -4,7 +4,7 @@ import type { DiagnosisResponse } from "../types/Diagnosis";
 
 type DiagnosisContextType = {
     diagnosis: DiagnosisResponse | null;
-    setDiagnosis: (data: DiagnosisResponse) => void;
+    setDiagnosis: (data: DiagnosisResponse | null) => void;
     clearDiagnosis: () => void;
 };
 

@@ -10,14 +10,14 @@ import { splitNextSteps } from "../../utils";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDiagnosisByID } from "../../services/Diagnosis";
+import { useTranslation } from "react-i18next";
 
 const Diagnosis = () => {
   const { id } = useParams();
   const { diagnosis, setDiagnosis } = useDiagnosis();
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
-
-
+  const { t } = useTranslation("symptoms")
   useEffect(() => {
 
     const fetchDiagnosis = async () => {
@@ -28,7 +28,7 @@ const Diagnosis = () => {
         const res = await getDiagnosisByID(id);
 
         if (!res.error) {
-          setDiagnosis(res); // 🔴 فقط الداتا
+          setDiagnosis(res);
         } else {
           setError(res.message || "Failed to load diagnosis");
         }
@@ -47,6 +47,9 @@ const Diagnosis = () => {
 
   }, [id, diagnosis, setDiagnosis])
 
+  useEffect(() => {
+    setDiagnosis(null);
+  }, [id]);
 
   if (loading) {
     return <p className="text-center mt-20">جاري تحميل التشخيص...</p>;
@@ -88,7 +91,7 @@ const Diagnosis = () => {
               {diagnosis.data.quickSymptoms.map((item, idx) => {
                 return (
                   <li className="bg-emerald-600 py-2 px-3 text-white  rounded-2xl font-medium" key={idx}>
-                    {item}
+                    {t(`quickSymptoms.${item}`)}
                   </li>
                 )
               })}

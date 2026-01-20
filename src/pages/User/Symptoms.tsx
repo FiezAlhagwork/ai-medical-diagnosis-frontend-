@@ -98,7 +98,7 @@ const SymptomsPage = () => {
             <LuActivity className="w-10 h-10 text-primary-foreground" />
           </div>
           <h2 className="text-2xl font-bold   mb-2">جاري تحليل الأعراض</h2>
-          <p className=" font-semibold mb-4">يرجى الانتظار قليلًا بينما نقوم بتقييم حالتك الصحية...</p>
+          <p className=" font-semibold mb-4">قد يستغرق التحليل بضع ثوانٍ...</p>
 
 
           <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">

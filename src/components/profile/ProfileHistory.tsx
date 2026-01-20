@@ -1,12 +1,32 @@
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animateFromToWithGsap, animateWithGsap } from "../../utils/animations";
 import DiagnosisCard from "../ui/DiagnosisCard";
 import { useTranslation } from "react-i18next";
+import type { DiagnosisData } from "../../types/Diagnosis";
+import { getAllDiagnosis } from "../../services/Diagnosis";
+
+
+
 
 const ProfileHistory = () => {
-    const { t } = useTranslation("profile")
+    const [diagnosis, setDiagnosis] = useState<DiagnosisData[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const historyRef = useRef<HTMLDivElement | null>(null);
+    const { t } = useTranslation("profile")
+
+    const fetchDiagnoses = async () => {
+        setIsLoading(true);
+        try {
+            const res = await getAllDiagnosis();
+            if (res.data && !res.error) {
+                setDiagnosis(res.data);
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useGSAP(() => {
         if (!historyRef.current) return
         const items = historyRef.current.children;
@@ -28,25 +48,22 @@ const ProfileHistory = () => {
 
     }, [])
 
+    useEffect(() => {
+        fetchDiagnoses()
+    }, [])
 
-    const Diagnosis = [
-        { id: "1", confidence: "75%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-        { id: "2", confidence: "69%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-        { id: "3", confidence: "85%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-        { id: "4", confidence: "85%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-        { id: "5", confidence: "85%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-        { id: "6", confidence: "85%", possible_condition: "نقص تروية عضلة القلب", createdAt: "22/10/2022" },
-    ]
+
+    if (isLoading) return <p className="text-5xl flex justify-center items-center h-screen">Loading...</p>
 
     return (
         <>
             <h2 id="historyTab" className="text-xl font-bold my-3 opacity-0 translate-y-20">{t("diagnosisHistory")}</h2>
             <div ref={historyRef} className="grid grid-cols-1 gap-4" >
                 {
-                    Diagnosis.map((item) => {
+                    diagnosis.map((item) => {
                         return (
                             <DiagnosisCard
-                                _id={item.id}
+                                _id={item._id}
                                 confidence={item.confidence}
                                 createdAt={item.createdAt}
                                 possible_condition={item.possible_condition} />

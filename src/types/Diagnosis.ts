@@ -1,4 +1,4 @@
-export type DiagnosisResponse = {
+export interface DiagnosisResponse {
   message: string;
   error: boolean;
   data: {
@@ -21,5 +21,21 @@ export type DiagnosisResponse = {
     updatedAt: string;
   };
 };
+
+
+export interface DiagnosisData {
+  _id: string
+  possible_condition: string;
+  createdAt: string;
+  confidence: string
+}
+export interface DiagnosisAllResponse {
+  count: number
+  message: string;
+  error: boolean;
+  data: DiagnosisData[]
+}
+
+
 
 

@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { CiGlobe } from "react-icons/ci";
 
 const ToggleButton = () => {
+  
   const current = i18n.language || localStorage.getItem("i18nextLng") || "ar";
   const toggle = () => {
     const newLang = current === "ar" ? "en" : "ar";
@@ -19,8 +20,6 @@ const ToggleButton = () => {
     });
   };
 
-
-console.log(document.documentElement);
 
   return (
     <button
