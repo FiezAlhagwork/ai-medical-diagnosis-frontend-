@@ -11,5 +11,9 @@ export const registerUser = (data: RegisterPayload) => {
 };
 
 export const loginUser = (data: LoginPayload) => {
-  return api.post<RegisterResponse>("api/auth/login", data);
+  return api.post<RegisterResponse>("/api/auth/login", data);
 };
+
+export const getUserById = (id: string) => {
+  return api.get<RegisterResponse>(`/api/auth/users/${id}`)
+}

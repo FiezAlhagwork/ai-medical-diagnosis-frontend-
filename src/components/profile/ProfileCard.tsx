@@ -1,8 +1,10 @@
+import { useAuth } from '../../context/AuthContext';
 import Button from '../ui/Button'
 import { FaRegEdit } from "react-icons/fa";
 
 
 const ProfileCard = () => {
+    const { user } = useAuth()
     return (
         <>
             <h1 className="text-center text-3xl  md:text-5xl font-bold">ملفي الشخصي</h1>
@@ -12,10 +14,10 @@ const ProfileCard = () => {
                 </div>
                 <div className="text-center md:text-start flex-1 md:ms-3 ">
                     <h2 className="text-2xl  font-semibold  ">
-                        Fiez Alhag
+                        {user?.name}
                     </h2>
                     <p className=" text-gray-500">
-                        fiezalhag@gmail.com
+                        {user?.email || ""}
                     </p>
                 </div>
                 <div className="md:pe-7">

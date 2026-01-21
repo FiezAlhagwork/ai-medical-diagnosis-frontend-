@@ -13,12 +13,15 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { VscWholeWord } from "react-icons/vsc";
 import { LuContactRound } from "react-icons/lu";
 import gsap from "gsap";
+import { useAuth } from "../../context/AuthContext";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState<string>("/");
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const { t: tAuth } = useTranslation("auth");
   const { t: tNav } = useTranslation("nav");
+  const { isAuthenticated, loading , logout } = useAuth()
 
   useGSAP(() => {
     if (openMenu) {
@@ -91,11 +94,10 @@ const Header = () => {
             <Link
               key={idx}
               to={item.path}
-              className={`text-gray-500 hover:text-primary transition-color duration-75  text-md pb-1 hover:border-b-2 hover:border-primary  ${
-                activeLink === item.path
-                  ? "text-primary border-b-2 border-primary text-md"
-                  : ""
-              }`}
+              className={`text-gray-500 hover:text-primary transition-color duration-75  text-md pb-1 hover:border-b-2 hover:border-primary  ${activeLink === item.path
+                ? "text-primary border-b-2 border-primary text-md"
+                : ""
+                }`}
               onClick={() => {
                 setActiveLink(item.path);
               }}
@@ -108,14 +110,25 @@ const Header = () => {
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
           <ToggleButton />
-          <Link to="/login">
-            <Button classNameButton="px-7 py-2">{tAuth("auth.login")}</Button>
-          </Link>
-          <Link to="/signup">
-            <button className=" cursor-pointer w-full text-sm font-medium py-2 px-7  rounded-md border-2 border-primary  hover:bg-primary hover:text-white duration-75 transition-all text-primary shadow-lg ">
-              {tAuth("auth.signUp")}
-            </button>
-          </Link>
+
+          {loading ? null : !isAuthenticated ? (
+            <>
+              <Link to="/login">
+                <Button classNameButton="px-7 py-2">
+                  {tAuth("auth.login")}
+                </Button>
+              </Link>
+
+              <Link to="/signup">
+                <button className="cursor-pointer w-full text-sm font-medium py-2 px-7 rounded-md border-2 border-primary hover:bg-primary hover:text-white transition-all text-primary shadow-lg">
+                  {tAuth("auth.signUp")}
+                </button>
+              </Link>
+            </>
+          ) : (
+            <UserMenu />
+          )}
+
         </div>
 
         {/* Mobile Menu Icon */}
@@ -141,9 +154,8 @@ const Header = () => {
         className="fixed top-0 h-full w-96 bg-white shadow-lg md:hidden p-5 flex flex-col gap-6 menu pt-7"
         style={{
           insetInlineStart: 0,
-          transform: `translateX(${
-            i18next.language === "ar" ? "100%" : "-100%"
-          })`,
+          transform: `translateX(${i18next.language === "ar" ? "100%" : "-100%"
+            })`,
         }}
       >
         {/* Top Section */}
@@ -166,16 +178,14 @@ const Header = () => {
                 setOpenMenu(false);
                 setActiveLink(item.path);
               }}
-              className={`text-md text-gray-700 pr-3 group py-4  flex items-center gap-4 ${
-                activeLink === item.path
-                  ? "bg-gray-100 text-primary font-extrabold "
-                  : "hover:bg-gray-100"
-              } `}
+              className={`text-md text-gray-700 pr-3 group py-4  flex items-center gap-4 ${activeLink === item.path
+                ? "bg-gray-100 text-primary font-extrabold "
+                : "hover:bg-gray-100"
+                } `}
             >
               <span
-                className={`text-gray-500 ps-2 ${
-                  activeLink === item.path ? "text-primary font-bold" : ""
-                }`}
+                className={`text-gray-500 ps-2 ${activeLink === item.path ? "text-primary font-bold" : ""
+                  }`}
               >
                 {" "}
                 {item.icon}
@@ -187,14 +197,24 @@ const Header = () => {
 
         {/* Auth Buttons */}
         <div className=" flex flex-col gap-3 pt-10 border-t-2  border-gray-100">
-          <Link to="/login" onClick={() => setOpenMenu(false)}>
-            <Button>{tAuth("auth.login")}</Button>
-          </Link>
-          <Link to="/signup" onClick={() => setOpenMenu(false)}>
-            <Button variant="outline" classNameButton="py-2 px-7">
-              {tAuth("auth.signUp")}
-            </Button>
-          </Link>
+          {!isAuthenticated ? (
+            <>
+              <Link to="/login" onClick={() => setOpenMenu(false)}>
+                <Button>{tAuth("auth.login")}</Button>
+              </Link>
+              <Link to="/signup" onClick={() => setOpenMenu(false)}>
+                <Button variant="outline">{tAuth("auth.signUp")}</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/profile" onClick={() => setOpenMenu(false)}>الملف الشخصي</Link>
+              <Link to="/diagnosis" onClick={() => setOpenMenu(false)}>تشخيصاتي</Link>
+              <button onClick={logout} className="text-red-600">
+                تسجيل الخروج
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>

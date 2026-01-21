@@ -7,10 +7,12 @@ import { useTranslation } from "react-i18next";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateFromToWithGsap, animateWithGsap } from "../../utils/animations";
+import { useAuth } from "../../context/AuthContext";
 
 
 const ProfileInfo = () => {
     const { t } = useTranslation("profile")
+    const { loading, user } = useAuth()
     const infoRef = useRef<HTMLDivElement | null>(null);
     useGSAP(() => {
         if (!infoRef.current) return
@@ -31,11 +33,13 @@ const ProfileInfo = () => {
             }
         );
     }, [])
+
+
     const stats = [
         {
             id: "phone",
             label: t("phone"),
-            value: `0997013656`,
+            value: user?.phone,
             icon: BsTelephone,
             bgColor: "bg-indigo-50",
             textColor: "text-indigo-600",
@@ -43,7 +47,7 @@ const ProfileInfo = () => {
         {
             id: "email",
             label: t("email"),
-            value: `fiezalhag@gmail.com`,
+            value: user?.email,
             icon: AiOutlineMail,
             bgColor: "bg-emerald-50",
             textColor: "text-emerald-600",
@@ -51,7 +55,7 @@ const ProfileInfo = () => {
         {
             id: "location",
             label: t("location"),
-            value: "دمشق ,الشعلان",
+            value: `${user?.province} , ${user?.city}`,
             icon: CiLocationOn,
             bgColor: "bg-amber-50",
             textColor: "text-amber-600",
@@ -67,6 +71,7 @@ const ProfileInfo = () => {
         },
     ];
 
+    if (loading) return <p className="text-2xl mt-10 flex items-center text-black">loading...</p>
 
     return (
         <>

@@ -7,6 +7,7 @@ import TextField from "../../components/ui/TextField";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import { loginUser } from "../../services/auth";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -20,16 +21,18 @@ const Login = () => {
     mode: "onChange",
   });
   const { t } = useTranslation("auth");
-
+  const { login } = useAuth()
   const onSubmit = async (data: LoginSchema) => {
     try {
       const res = await loginUser(data)
 
-      if (res.user && res.user.token) {
-        localStorage.setItem("token", res.user.token);
+      if (res.user && res.token) {
+        localStorage.setItem("token", res.token);
         localStorage.setItem("role", res.user.role);
+        localStorage.setItem("userId", res.user._id);
 
-        
+        login(res.user)
+
         if (res.user.role === "admin") {
           navigate("/admin");
         }

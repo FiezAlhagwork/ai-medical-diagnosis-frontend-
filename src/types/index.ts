@@ -100,7 +100,7 @@ export type DoctorCardProps = {
 export type DoctorStatProps = {
   id?: string;
   label: string;
-  value: string;
+  value: string | undefined;
   Icon: IconType;
   bgColor: string;
   textColor: string;
