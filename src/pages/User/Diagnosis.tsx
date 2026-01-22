@@ -7,7 +7,7 @@ import { GoArrowRight } from "react-icons/go";
 import Button from "../../components/ui/Button";
 import { useDiagnosis } from "../../context/DiagnosisContext";
 import { splitNextSteps } from "../../utils";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDiagnosisByID } from "../../services/Diagnosis";
 import { useTranslation } from "react-i18next";
@@ -170,9 +170,6 @@ const Diagnosis = () => {
           <Button icon={<GoArrowRight size={22} className="mt-1.5" />}>عرض الاطباء</Button>
         </div>
       </div>
-      <Link to="/symptoms">
-        <Button>انشاء حالة جديدة </Button>
-      </Link>
     </main>
   )
 }
