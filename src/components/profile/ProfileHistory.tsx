@@ -10,10 +10,10 @@ import { getAllDiagnosis } from "../../services/Diagnosis";
 
 
 const ProfileHistory = () => {
+    const { t } = useTranslation("profile")
     const [diagnosis, setDiagnosis] = useState<DiagnosisData[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const historyRef = useRef<HTMLDivElement | null>(null);
-    const { t } = useTranslation("profile")
 
     const fetchDiagnoses = async () => {
         setIsLoading(true);
@@ -27,37 +27,39 @@ const ProfileHistory = () => {
         }
     };
 
+    useEffect(() => {
+        fetchDiagnoses()
+    }, [])
+
     useGSAP(() => {
-        if (!historyRef.current) return
-        const items = historyRef.current.children;
-        const elements = Array.from(items) as HTMLElement[];
+        if (!historyRef.current || diagnosis.length === 0) return;
+        const cards = historyRef.current?.children;
+        const elements = Array.from(cards) as HTMLElement[];
+
         animateWithGsap("#historyTab", {
             opacity: 1,
             y: 0,
         })
-        animateFromToWithGsap(
-            elements,
+        animateFromToWithGsap(elements,
             { opacity: 0, y: 80 },
             {
                 opacity: 1,
                 y: 0,
                 ease: "power1.inOut",
                 stagger: 0.2,
-            }
+            },
+
         );
+    }, [diagnosis])
 
-    }, [])
 
-    useEffect(() => {
-        fetchDiagnoses()
-    }, [])
 
 
     if (isLoading) return <p className="text-5xl flex justify-center items-center h-screen">Loading...</p>
 
     return (
         <>
-            <h2 id="historyTab" className="text-xl font-bold my-3 opacity-0 translate-y-20">{t("diagnosisHistory")}</h2>
+            <h2 id="historyTab" className="text-xl font-bold my-3 opacity-0 translate-y-20 ">{t("diagnosisHistory")}</h2>
             <div ref={historyRef} className="grid grid-cols-1 gap-4" >
                 {
                     diagnosis.map((item) => {
