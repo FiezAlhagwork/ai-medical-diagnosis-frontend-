@@ -6,15 +6,15 @@ import type { DoctorCardProps } from "../../types";
 import { useTranslation } from "react-i18next";
 
 const DoctorCard = ({ item }: DoctorCardProps) => {
-  const { image, name, province, rating, id, specialty } = item;
+  const { image, name, province, rating, _id, specialty } = item;
   const { t } = useTranslation("doctor");
   return (
     <div className="group h-full bg-white rounded-4xl border border-gray-100   overflow-hidden   transition-all duration-300 ease-out flex flex-col ">
       <div className=" relative h-72 bg-gray-50 overflow-hidden ">
         <img
           className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110 "
-          src={image}
-          alt=""
+          src={image?.url}
+          alt="Doctor image "
         />
         <div className=" absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1 z-10">
           <FaStar className="text-yellow-500" />
@@ -40,7 +40,7 @@ const DoctorCard = ({ item }: DoctorCardProps) => {
           <CiLocationOn size={15} className="mt-1 me-1" />
           {province}
         </p>
-        <Link to={`/doctor/${id}`}>
+        <Link to={`/doctor/${_id}`}>
           <Button>{t("view_more")}</Button>
         </Link>
       </div>
