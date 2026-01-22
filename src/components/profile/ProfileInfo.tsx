@@ -64,7 +64,7 @@ const ProfileInfo = () => {
         {
             id: "date",
             label: t("date"),
-            value: "22/10/2022",
+            value: user?.age,
             icon: MdOutlineDateRange,
             bgColor: "bg-red-50",
             textColor: "text-red-500",
