@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SymptomsSchema, type SymptomsType } from "../../schema";
@@ -24,6 +24,14 @@ const SymptomsPage = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false)
   const { t, i18n } = useTranslation("symptoms");
+
+  // تمرير الصفحة لأعلى عند ظهور شاشة التحميل
+  useEffect(() => {
+    if (loading) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [loading]);
+
   useGSAP(() => {
     gsap.fromTo("#progress", {
       width: 0,
