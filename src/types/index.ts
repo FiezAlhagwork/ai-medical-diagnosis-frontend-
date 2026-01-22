@@ -9,6 +9,7 @@ import type {
 } from "react-hook-form";
 import type { IconType } from "react-icons/lib";
 import type { DURATIONS, SEVERITIES } from "../constant";
+import type { Doctor } from "./Doctor";
 
 export type TextFieldProps = {
   label: string;
@@ -84,14 +85,7 @@ export type SpecialtyCardProps = {
   browseDoctor: string;
 };
 
-export type Doctor = {
-  id: number;
-  image: string;
-  name: string;
-  specialty: string;
-  province: string;
-  rating: number;
-};
+
 
 export type DoctorCardProps = {
   item: Doctor;
@@ -144,3 +138,17 @@ export type DiagnosisCardProps = {
   confidence: string
 
 }
+
+
+export type DoctorResultsProps = {
+  specialty: string;
+  city?: string;
+  province?: string;
+};
+
+export type LoadingProps = {
+  title?: string;
+  message?: string;
+  fullScreen?: boolean;
+  icon?: IconType;
+};

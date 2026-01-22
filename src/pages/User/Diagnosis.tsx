@@ -11,12 +11,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDiagnosisByID } from "../../services/Diagnosis";
 import { useTranslation } from "react-i18next";
+import DoctorResults from "../../components/Doctors/DoctorResults";
+import { useAuth } from "../../context/AuthContext";
+import Loading from "../../components/ui/Loading";
 
 const Diagnosis = () => {
   const { id } = useParams();
   const { diagnosis, setDiagnosis } = useDiagnosis();
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>("")
+  const [showDoctors, setShowDoctors] = useState(false);
+  const { user } = useAuth()
   const { t } = useTranslation("symptoms")
   useEffect(() => {
 
@@ -52,7 +57,7 @@ const Diagnosis = () => {
   }, [id]);
 
   if (loading) {
-    return <p className="text-center mt-20">جاري تحميل التشخيص...</p>;
+    return <Loading message="يرجى الانتظار..." fullScreen={true} />
   }
 
   if (error) {
@@ -158,17 +163,25 @@ const Diagnosis = () => {
 
           </div>
         </div>
-
-        <div className="glass mt-12  ">
-          <h3 className="flex items-center  gap-2 text-gray-700 text-xl font-semibold my-4">
-            <BsFillPeopleFill size={26} className="text-emerald-600 mt-1" />
-            المتخصصون المقترحون            </h3>
-          <div className=" ">
-            <h1 className=" text-lg font-semibold ">{diagnosis.data.matchedSpecialty}</h1>
-            <p className="text-sm text-gray-500  my-3 ">للتقييم والعلاج العام</p>
+        {!showDoctors &&
+          <div className="glass mt-12  ">
+            <h3 className="flex items-center  gap-2 text-gray-700 text-xl font-semibold my-4">
+              <BsFillPeopleFill size={26} className="text-emerald-600 mt-1" />
+              المتخصصون المقترحون</h3>
+            <div className=" ">
+              <h1 className=" text-lg font-semibold ">{diagnosis.data.matchedSpecialty}</h1>
+              <p className="text-sm text-gray-500  my-3 ">للتقييم والعلاج العام</p>
+            </div>
+            <Button onClick={() => setShowDoctors(true)} icon={<GoArrowRight size={22} className="mt-1.5" />}>عرض الاطباء</Button>
           </div>
-          <Button icon={<GoArrowRight size={22} className="mt-1.5" />}>عرض الاطباء</Button>
-        </div>
+        }
+
+        {showDoctors &&
+          <DoctorResults
+            specialty={diagnosis.data.matchedSpecialty}
+            city={user?.city}
+            province={user?.province}
+          />}
       </div>
     </main>
   )
