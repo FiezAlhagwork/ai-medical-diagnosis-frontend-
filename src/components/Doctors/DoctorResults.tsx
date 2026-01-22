@@ -5,6 +5,8 @@ import type { DoctorResultsProps } from "../../types"
 import { getDoctors } from "../../services/Doctor";
 import DoctorCard from "../ui/DoctorCard";
 import type { Doctor } from "../../types/Doctor";
+import EmptyState from "../ui/EmptyState";
+import { MdSearch } from "react-icons/md";
 
 
 const DoctorResults = ({ specialty, city, province }: DoctorResultsProps) => {
@@ -77,13 +79,12 @@ const DoctorResults = ({ specialty, city, province }: DoctorResultsProps) => {
             {/* 🟡 لا يوجد بيانات */}
             {!error && doctors.length === 0 && (
                 <div className="text-center mt-12">
-                    <p className="text-gray-600 text-lg">
-                        {message || "لا يوجد أطباء متاحون حاليًا"}
-                    </p>
 
-                    <p className="text-sm text-gray-400 mt-2">
-                        يمكنك المحاولة باختصاص آخر أو منطقة مختلفة
-                    </p>
+                    <EmptyState
+                        icon={MdSearch}
+                        title={message || "لا يوجد أطباء متاحون حاليًا"}
+                        description="يمكنك المحاولة باختصاص آخر أو منطقة مختلفة"
+                    />
                 </div>
             )}
         </div>
