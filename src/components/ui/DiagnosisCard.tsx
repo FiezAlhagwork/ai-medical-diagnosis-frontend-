@@ -1,4 +1,5 @@
 import { BiHistory } from "react-icons/bi";
+import moment from "moment";
 import type { DiagnosisCardProps } from "../../types";
 import { Link } from "react-router-dom";
 const DiagnosisCard = ({ _id, confidence, createdAt, possible_condition }: DiagnosisCardProps) => {
@@ -11,7 +12,7 @@ const DiagnosisCard = ({ _id, confidence, createdAt, possible_condition }: Diagn
                     </div>
                     <div>
                         <h1 className="text-lg font-semibold mb-1 ">{possible_condition}</h1>
-                        <span className="text-[14px] text-gray-500">{createdAt}</span>
+                        <span className="text-[14px] text-gray-500">{moment(createdAt).format("YYYY/MM/DD")}</span>
                     </div>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-between text-[13px]">
