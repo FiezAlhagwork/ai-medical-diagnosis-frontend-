@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from "react-i18next";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,9 +12,11 @@ import Button from "../../components/ui/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/auth";
 import type { RegisterPayload } from "../../types/auth";
+import { useAuth } from "../../context/AuthContext";
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const { t } = useTranslation("auth");
   const {
     register,
@@ -44,15 +47,16 @@ const SignUp = () => {
 
       }
       const res = await registerUser(payload)
-      if (res.user && res.user.token) {
-        localStorage.setItem("token", res.user.token);
+      if (res.user && res.token) {
+        localStorage.setItem("token", res.token);
         localStorage.setItem("role", res.user.role);
+        localStorage.setItem("userId", res.user._id);
+        login(res.user)
         navigate("/profile")
       }
-    } catch (error) {
+    } catch (error: any) {
       const message =
         error?.response?.data?.message || "Something went wrong";
-
       // عرض الرسالة على مستوى root form
       setError("root", {
         type: "server",
@@ -133,13 +137,13 @@ const SignUp = () => {
             />
             <SelectField
               label={t("auth.province")}
-              options={["دمشق", "حمص", "درعا"]}
+              options={["دمشق"]}
               error={errors.province}
               registration={register("province")}
             />
             <SelectField
               label={t("auth.city")}
-              options={["دمشق", "حمص", "درعا"]}
+              options={["الحمراء", "الصالحية", "شعلان", "ساحة عرنوس"]}
               error={errors.city}
               registration={register("city")}
             />
