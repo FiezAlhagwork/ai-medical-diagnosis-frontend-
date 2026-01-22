@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../ui/Button'
 import { FaRegEdit } from "react-icons/fa";
@@ -21,9 +22,11 @@ const ProfileCard = () => {
                     </p>
                 </div>
                 <div className="md:pe-7">
-                    <Button icon={<FaRegEdit size={22} />} variant="primary">
-                        تعديل الملف
-                    </Button>
+                    <Link to="/symptoms" >
+                        <Button icon={<FaRegEdit size={22} />} variant="primary">
+                            انشاء تشخيص
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </>
