@@ -9,10 +9,9 @@
     "language": "Language",
     "theme": "Theme",
     "noDiagnoses": "No diagnosis history yet",
-    "phone":"phone",
-    "email":"Email",
-    "location":"location",
-    "date":"date"
-
-
+    "phone": "phone",
+    "email": "Email",
+    "location": "location",
+    "date": "date",
+    "create_diagnosis": "create diagnosis"
 }
