@@ -5,9 +5,19 @@
   "experience": "الخبرة",
   "years": "سنوات",
   "price": "سعر الكشف",
+  "currency": "ل.س",
   "languages": "اللغات",
   "address": "عنوان",
   "about": "نبذة",
   "certificate": "شهادة",
-  "view_more": "عرض المزيد"
+  "view_more": "عرض المزيد",
+  "searchDoctors": {
+    "title": "البحث عن الأطباء",
+    "subtitle": "ابحث عن الطبيب المناسب حسب التخصص والموقع",
+    "selectSpecialtyHint": "اختر التخصص وابدأ البحث عن الأطباء",
+    "specialty": "التخصص",
+    "province": "المحافظة",
+    "city": "المدينة",
+    "searchButton": "بحث عن الاطباء"
+  }
 }

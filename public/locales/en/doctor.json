@@ -5,9 +5,19 @@
   "experience": "Experience",
   "years": "years",
   "price": "price",
+  "currency": "SYP",
   "languages": "Languages",
   "address": "Address",
   "about": "About",
   "certificate": "certificate",
-  "view_more": "view more"
+  "view_more": "view more",
+  "searchDoctors": {
+    "title": "Search for Doctors",
+    "subtitle": "Find the right doctor by specialty and location",
+    "selectSpecialtyHint": "Select a specialty and start searching for doctors",
+    "specialty": "Specialty",
+    "province": "Province",
+    "city": "City",
+    "searchButton": "Search Doctors"
+  }
 }

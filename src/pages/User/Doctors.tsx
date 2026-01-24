@@ -6,14 +6,12 @@ import SelectField from "../../components/ui/SelectField";
 import Button from "../../components/ui/Button";
 import DoctorResults from "../../components/Doctors/DoctorResults";
 import { CiStethoscope } from "react-icons/ci";
+import type { GetDoctorsParams } from "../../types/Doctor";
+import { useTranslation } from "react-i18next";
 
 const Doctors = () => {
-  const [searchParams, setSearchParams] = useState<{
-    specialty: string;
-    city?: string;
-    province?: string;
-  } | null>(null);
-
+  const [searchParams, setSearchParams] = useState<GetDoctorsParams | null>(null);
+  const { t } = useTranslation("doctor")
   const {
     register,
     handleSubmit,
@@ -27,7 +25,6 @@ const Doctors = () => {
     },
   });
 
-  // قائمة الاختصاصات
   const specialties = [
     "القلب والاوعية الدموية",
     "طب أسنان",
@@ -55,10 +52,8 @@ const Doctors = () => {
     "سمع ونطق",
   ]
 
-  // قائمة المحافظات
   const provinces = ["دمشق"];
 
-  // قائمة المدن
   const cities = ["الحمراء", "الصالحية", "شعلان", "ساحة عرنوس"];
 
   const onSubmit = (data: DoctorSearchType) => {
@@ -76,11 +71,11 @@ const Doctors = () => {
           <div className="flex items-center justify-center gap-3 mb-4">
             <CiStethoscope size={40} className="text-primary" />
             <h1 className="text-3xl md:text-5xl font-bold">
-              البحث عن الأطباء
+              {t("searchDoctors.title")}
             </h1>
           </div>
           <p className="text-gray-600 text-lg">
-            ابحث عن الطبيب المناسب حسب التخصص والموقع
+            {t("searchDoctors.subtitle")}
           </p>
         </div>
 
@@ -90,19 +85,19 @@ const Doctors = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <SelectField
-              label="التخصص *"
+              label={`${t("searchDoctors.specialty")} *`}
               options={specialties}
               error={errors.specialty}
               registration={register("specialty")}
             />
             <SelectField
-              label="المحافظة"
+              label={`${t("searchDoctors.province")}`}
               options={provinces}
               error={errors.province}
               registration={register("province")}
             />
             <SelectField
-              label="المدينة"
+              label={`${t("searchDoctors.city")}`}
               options={cities}
               error={errors.city}
               registration={register("city")}
@@ -111,7 +106,7 @@ const Doctors = () => {
 
           <div className="mt-6">
             <Button type="submit">
-              بحث عن الأطباء
+              {t("searchDoctors.searchButton")}
             </Button>
           </div>
 
@@ -131,7 +126,7 @@ const Doctors = () => {
         {!searchParams && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
-              اختر التخصص وابدأ البحث عن الأطباء
+              {t("searchDoctors.selectSpecialtyHint")}
             </p>
           </div>
         )}
