@@ -7,6 +7,7 @@ import DoctorCard from "../ui/DoctorCard";
 import type { Doctor } from "../../types/Doctor";
 import EmptyState from "../ui/EmptyState";
 import { MdSearch } from "react-icons/md";
+import Loading from "../ui/Loading";
 
 
 const DoctorResults = ({ specialty, city, province }: DoctorResultsProps) => {
@@ -48,7 +49,7 @@ const DoctorResults = ({ specialty, city, province }: DoctorResultsProps) => {
 
 
     if (loading) {
-        return <p className="text-center mt-10">جاري تحميل الأطباء...</p>;
+        return <Loading title="...جاري تحميل الأطباء" icon={MdSearch} />;
     }
 
     return (
