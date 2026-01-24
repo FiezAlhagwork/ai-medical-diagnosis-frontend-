@@ -152,3 +152,13 @@ export type LoadingProps = {
   fullScreen?: boolean;
   icon?: IconType;
 };
+
+
+export type EmptyStateProps = {
+  icon?: IconType | React.ReactNode;
+  title?: string;
+  description?: string;
+  actionLabel?: string;
+  onAction?: () => void;
+  className?: string;
+};

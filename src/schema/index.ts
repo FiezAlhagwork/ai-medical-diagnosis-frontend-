@@ -55,3 +55,11 @@ export const SymptomsSchema = z.object({
 });
 
 export type SymptomsType = z.infer<typeof SymptomsSchema>;
+
+export const DoctorSearchSchema = z.object({
+  specialty: z.string().min(1, "يرجى اختيار التخصص"),
+  province: z.string().optional(),
+  city: z.string().optional(),
+});
+
+export type DoctorSearchType = z.infer<typeof DoctorSearchSchema>;
