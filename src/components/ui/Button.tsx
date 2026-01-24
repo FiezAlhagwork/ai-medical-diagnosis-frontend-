@@ -7,7 +7,7 @@ const variants = {
   `,
 
   outline: `
-      text-primary hover:bg-blue-200 hover:text-primary bg-white
+      text-primary hover:bg-blue-300 hover:text-white bg-white border-2 border-primary
   `,
 };
 
