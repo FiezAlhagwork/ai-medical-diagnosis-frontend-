@@ -5,6 +5,9 @@ import DiagnosisCard from "../ui/DiagnosisCard";
 import { useTranslation } from "react-i18next";
 import type { DiagnosisData } from "../../types/Diagnosis";
 import { getAllDiagnosis } from "../../services/Diagnosis";
+import Loading from "../ui/Loading";
+import { MdHistory } from "react-icons/md";
+import EmptyState from "../ui/EmptyState";
 
 
 
@@ -55,14 +58,15 @@ const ProfileHistory = () => {
 
 
 
-    if (isLoading) return <p className="text-5xl flex justify-center items-center h-screen">Loading...</p>
+    if (isLoading) return <Loading title="جاري تحميل الاعراض..." />
+
 
     return (
         <>
             <h2 id="historyTab" className="text-xl font-bold my-3 opacity-0 translate-y-20 ">{t("diagnosisHistory")}</h2>
             <div ref={historyRef} className="grid grid-cols-1 gap-4" >
                 {
-                    diagnosis.map((item) => {
+                    diagnosis.length > 0 ? diagnosis.map((item) => {
                         return (
                             <DiagnosisCard
                                 _id={item._id}
@@ -70,7 +74,11 @@ const ProfileHistory = () => {
                                 createdAt={item.createdAt}
                                 possible_condition={item.possible_condition} />
                         )
-                    })
+                    }) : (<EmptyState
+                        icon={MdHistory}
+                        title="لا توجد تشخصيات"
+                        description="لم يتم العثور على  اي تشخيص "
+                    />)
                 }
             </div>
         </>

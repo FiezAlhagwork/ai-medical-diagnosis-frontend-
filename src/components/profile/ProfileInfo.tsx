@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateFromToWithGsap, animateWithGsap } from "../../utils/animations";
 import { useAuth } from "../../context/AuthContext";
+import Loading from "../ui/Loading";
 
 
 const ProfileInfo = () => {
@@ -71,7 +72,7 @@ const ProfileInfo = () => {
         },
     ];
 
-    if (loading) return <p className="text-2xl mt-10 flex items-center text-black">loading...</p>
+    if (loading) return <Loading />
 
     return (
         <>
