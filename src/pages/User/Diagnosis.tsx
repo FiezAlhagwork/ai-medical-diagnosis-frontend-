@@ -14,11 +14,13 @@ import { useTranslation } from "react-i18next";
 import DoctorResults from "../../components/Doctors/DoctorResults";
 import { useAuth } from "../../context/AuthContext";
 import Loading from "../../components/ui/Loading";
+import { MdHistory } from "react-icons/md";
+import EmptyState from "../../components/ui/EmptyState";
 
 const Diagnosis = () => {
   const { id } = useParams();
   const { diagnosis, setDiagnosis } = useDiagnosis();
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
   const [showDoctors, setShowDoctors] = useState(false);
   const { user } = useAuth()
@@ -62,16 +64,20 @@ const Diagnosis = () => {
 
   if (error) {
     return (
-      <p className="text-center text-red-500 mt-20">
+      <p className="text-center text-red-500 h-screen flex justify-center items-center">
         {error}
       </p>
     );
   }
 
   if (!diagnosis) {
-    return <p className="text-center text-3xl mt-20">
-      لا يوجد تشخيص
-    </p>;
+    return <div className="h-screen flex justify-center items-center">
+      <EmptyState
+        icon={MdHistory}
+        title="لا توجد سجلات"
+        description="لم يتم العثور على أي سجلات طبية"
+      />
+    </div>
   }
 
   return (
