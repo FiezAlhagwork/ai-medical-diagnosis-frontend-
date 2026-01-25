@@ -10,3 +10,7 @@ export const getDoctors = ({ specialty, city, province }: GetDoctorsParams) => {
 export const getDoctorById = (id: string | undefined) => {
     return api.get<DoctorResponseById>(`/api/doctor/${id}`)
 }
+
+export const getTopRated = () => {
+    return api.get<DoctorResponse>("/api/doctor/top-rated")
+}
