@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DoctorSearchSchema, type DoctorSearchType } from "../../schema";
@@ -8,10 +9,26 @@ import DoctorResults from "../../components/Doctors/DoctorResults";
 import { CiStethoscope } from "react-icons/ci";
 import type { GetDoctorsParams } from "../../types/Doctor";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
+import { cities, provinces } from "../../constant";
 
 const Doctors = () => {
   const [searchParams, setSearchParams] = useState<GetDoctorsParams | null>(null);
   const { t } = useTranslation("doctor")
+  const [searchParamsUrl] = useSearchParams();
+  const specialtyFromUrl = searchParamsUrl.get("specialty");
+
+  useEffect(() => {
+    if (specialtyFromUrl) {
+      setSearchParams({
+        specialty: specialtyFromUrl,
+        city: undefined,
+        province: undefined,
+      });
+    }
+  }, [specialtyFromUrl]);
+
+
   const {
     register,
     handleSubmit,
@@ -52,9 +69,7 @@ const Doctors = () => {
     "سمع ونطق",
   ]
 
-  const provinces = ["دمشق"];
 
-  const cities = ["الحمراء", "الصالحية", "شعلان", "ساحة عرنوس"];
 
   const onSubmit = (data: DoctorSearchType) => {
     setSearchParams({

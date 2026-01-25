@@ -150,3 +150,8 @@ export const QUICK_SYMPTOMS = [
   { id: "heat_intolerance", order: 50 },
 ] as const;
 
+
+export const provinces = ["دمشق"];
+
+export const cities = ["الحمراء", "الصالحية", "شعلان", "ساحة عرنوس"];
+
