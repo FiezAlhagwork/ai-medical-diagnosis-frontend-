@@ -79,10 +79,11 @@ type Item = {
   name: string;
   icon: JSX.Element;
   styleCustom: string;
+  value: string
 };
+
 export type SpecialtyCardProps = {
   item: Item;
-  browseDoctor: string;
 };
 
 

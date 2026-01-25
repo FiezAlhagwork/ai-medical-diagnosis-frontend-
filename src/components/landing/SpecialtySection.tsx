@@ -13,57 +13,63 @@ import SpecialtyCard from "../ui/SpecialtyCard";
 
 const SpecialtySection = () => {
   const { t } = useTranslation("landing");
-
   const containerSpecialtyRef = useRef<HTMLDivElement | null>(null);
-
   const specialtyData = [
     {
       id: 1,
       name: t("browse_by_specialty.cardiology"),
       icon: <CiHeart size={35} />,
       styleCustom: "bg-rose-50 text-rose-500 group-hover:bg-rose-500",
+      value: "القلب والاوعية الدموية"
     },
     {
       id: 2,
       name: t("browse_by_specialty.pediatrics"),
       icon: <LuBaby size={35} />,
       styleCustom: "bg-sky-50 text-sky-500 group-hover:bg-sky-500",
+      value: "طب أطفال"
     },
     {
       id: 3,
       name: t("browse_by_specialty.skin_diseases"),
       icon: <FiLayers size={35} />,
       styleCustom: "bg-teal-50 text-teal-500 group-hover:bg-teal-500",
+      value: "جلدية وتناسلية"
     },
     {
       id: 4,
       name: t("browse_by_specialty.ears_and_nose"),
       icon: <LuEar size={35} />,
       styleCustom: "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
+      value: "أنف وأذن وحنجرة"
     },
     {
       id: 5,
       name: t("browse_by_specialty.dentistry"),
       icon: <RiToothLine size={35} />,
       styleCustom: "bg-blue-50 text-blue-500 group-hover:bg-blue-500",
+      value: "طب أسنان"
     },
     {
       id: 6,
       name: t("browse_by_specialty.ophthalmology"),
       icon: <IoEyeOutline size={35} />,
       styleCustom: "bg-emerald-50 text-emerald-500 group-hover:bg-emerald-500",
+      value: "طب العيون"
     },
     {
       id: 7,
       name: t("browse_by_specialty.bones_and_joints"),
       icon: <LiaBoneSolid size={35} />,
       styleCustom: "bg-orange-50 text-orange-500 group-hover:bg-orange-500",
+      value: "جراحة العظام والمفاصل"
     },
     {
       id: 8,
       name: t("browse_by_specialty.neurology"),
       icon: <LuBrain size={35} />,
-      styleCustom: "bg-violet-50 text-violet-500 group-hover:bg-violet-500  ",
+      styleCustom: "bg-violet-50 text-violet-500 group-hover:bg-violet-500 ",
+      value: "دماغ وأعصاب"
     },
   ];
 
@@ -75,11 +81,11 @@ const SpecialtySection = () => {
       elements,
       { opacity: 0, y: 80 },
       {
-        duration: 0.8,
+        duration: 0.6,
         opacity: 1,
         y: 0,
         ease: "power3.inOut",
-        stagger: 0.5,
+        stagger: 0.2,
       }
     );
   }, []);
@@ -98,8 +104,8 @@ const SpecialtySection = () => {
           {specialtyData.map((item) => {
             return (
               <SpecialtyCard
+                key={item.id}
                 item={item}
-                browseDoctor={t("browse_by_specialty.browse_doctors")}
               />
             );
           })}
