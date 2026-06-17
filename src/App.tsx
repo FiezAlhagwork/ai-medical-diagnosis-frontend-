@@ -8,6 +8,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 import { DiagnosisProvider } from "./context/DiagnosisContext";
 import { AuthProvider } from "./context/AuthContext";
+import Loading from "./components/ui/Loading";
 
 // Lazy Loaded Pages
 const Login = lazy(() => import("./pages/Auth/Login"));
@@ -20,34 +21,18 @@ const Doctors = lazy(() => import("./pages/User/Doctors"));
 const DoctorProfile = lazy(() => import("./pages/User/DoctorProfile"));
 const Diagnosis = lazy(() => import("./pages/User/Diagnosis"));
 
-const AdminDashboard = lazy(
-  () => import("./pages/Admin/AdminDashboard")
-);
-const Dashboard = lazy(
-  () => import("./pages/Admin/Dashboard")
-);
-const ManageDoctor = lazy(
-  () => import("./pages/Admin/ManageDoctor")
-);
-const ManageUser = lazy(
-  () => import("./pages/Admin/ManageUser")
-);
-const CreateDoctor = lazy(
-  () => import("./pages/Admin/CreateDoctor")
-);
+const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"));
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard"));
+const ManageDoctor = lazy(() => import("./pages/Admin/ManageDoctor"));
+const ManageUser = lazy(() => import("./pages/Admin/ManageUser"));
+const CreateDoctor = lazy(() => import("./pages/Admin/CreateDoctor"));
 
 function App() {
   return (
     <AuthProvider>
       <DiagnosisProvider>
         <Router>
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center min-h-screen">
-                Loading...
-              </div>
-            }
-          >
+          <Suspense fallback={<Loading title="جاري تحميل ..." fullScreen />}>
             <Routes>
               {/* Auth Routes */}
               <Route path="/login" element={<Login />} />
@@ -62,35 +47,17 @@ function App() {
                   <Route path="/symptoms" element={<Symptoms />} />
                   <Route path="/doctors" element={<Doctors />} />
                   <Route path="/doctor/:id" element={<DoctorProfile />} />
-                  <Route
-                    path="/diagnosis/:id"
-                    element={<Diagnosis />}
-                  />
+                  <Route path="/diagnosis/:id" element={<Diagnosis />} />
                 </Route>
               </Route>
 
               {/* Admin Routes */}
               <Route element={<ProtectedRoute role="admin" />}>
-                <Route
-                  path="/admin"
-                  element={<AdminDashboard />}
-                >
-                  <Route
-                    path="dashboard"
-                    element={<Dashboard />}
-                  />
-                  <Route
-                    path="manageDoctor"
-                    element={<ManageDoctor />}
-                  />
-                  <Route
-                    path="manageUser"
-                    element={<ManageUser />}
-                  />
-                  <Route
-                    path="createDoctor"
-                    element={<CreateDoctor />}
-                  />
+                <Route path="/admin" element={<AdminDashboard />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="manageDoctor" element={<ManageDoctor />} />
+                  <Route path="manageUser" element={<ManageUser />} />
+                  <Route path="createDoctor" element={<CreateDoctor />} />
                 </Route>
               </Route>
             </Routes>
