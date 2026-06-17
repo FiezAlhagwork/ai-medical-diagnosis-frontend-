@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animateFromToWithGsap, animateWithGsap } from "../../utils/animations";
 import DiagnosisCard from "../ui/DiagnosisCard";
 import { useTranslation } from "react-i18next";
-import type { DiagnosisData } from "../../types/Diagnosis";
+import type { Diagnosis } from "../../types/Diagnosis";
 import { getAllDiagnosis } from "../../services/Diagnosis";
 import Loading from "../ui/Loading";
 import { MdHistory } from "react-icons/md";
@@ -14,7 +14,7 @@ import EmptyState from "../ui/EmptyState";
 
 const ProfileHistory = () => {
     const { t } = useTranslation("profile")
-    const [diagnosis, setDiagnosis] = useState<DiagnosisData[]>([])
+    const [diagnosis, setDiagnosis] = useState<Diagnosis[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const historyRef = useRef<HTMLDivElement | null>(null);
 

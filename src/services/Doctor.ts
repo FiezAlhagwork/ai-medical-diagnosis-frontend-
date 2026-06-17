@@ -14,3 +14,11 @@ export const getDoctorById = (id: string | undefined) => {
 export const getTopRated = () => {
     return api.get<DoctorResponse>("/api/doctor/top-rated")
 }
+
+export const createDoctor = (formData: FormData) => {
+    return api.post<DoctorResponseById>("/api/doctor", formData)
+}
+
+export const getAllDoctors = () => {
+    return api.get<DoctorResponse>("/api/doctor/")
+}

@@ -1,17 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
-import type { DiagnosisResponse } from "../types/Diagnosis";
+import type { Diagnosis} from "../types/Diagnosis";
 
 type DiagnosisContextType = {
-    diagnosis: DiagnosisResponse | null;
-    setDiagnosis: (data: DiagnosisResponse | null) => void;
+    diagnosis: Diagnosis | null;
+    setDiagnosis: (data: Diagnosis | null) => void;
     clearDiagnosis: () => void;
 };
 
 const DiagnosisContext = createContext<DiagnosisContextType | null>(null)
 
 export const DiagnosisProvider = ({ children }: { children: React.ReactNode }) => {
-    const [diagnosis, setDiagnosis] = useState<DiagnosisResponse | null>(null);
+    const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
 
     return (
         <DiagnosisContext.Provider

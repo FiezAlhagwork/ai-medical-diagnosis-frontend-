@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { provinces, specialties } from "../constant";
 // import { fi } from "zod/locales";
 
 export const loginSchema = z.object({
@@ -63,3 +64,45 @@ export const DoctorSearchSchema = z.object({
 });
 
 export type DoctorSearchType = z.infer<typeof DoctorSearchSchema>;
+
+
+export const DoctorCreateSchema = z.object({
+  name: z.string().min(1, "الاسم مطلوب"),
+  specialty: z.enum(specialties, { message: "يرجى اختيار التخصص" }),
+  experienceYears: z
+    .coerce.number()
+    .int()
+    .min(0, "عدد سنوات الخبرة غير صالح"),
+  age: z
+    .coerce.number()
+    .int()
+    .min(18, "العمر يجب أن يكون 18 على الأقل"),
+  languages: z.string().min(1, "اللغات مطلوبة"),
+
+  province: z.enum(provinces, { message: "يرجى اختيار المحافظة" }),
+  city: z.string().min(1, "المدينة مطلوبة"),
+  clinicAddress: z.string().min(1, "عنوان العيادة مطلوب"),
+  education: z.object({
+    university: z.string().min(4, "الجامعة مطلوبة")
+  }),
+  contact: z.object({
+    phone: z.string().min(1, "رقم الهاتف مطلوب"),
+    email: z.string().email("بريد إلكتروني غير صالح"),
+    socialLinks: z
+      .object({
+        facebook: z.string().url().optional().or(z.literal("")),
+        instagram: z.string().url().optional().or(z.literal("")),
+        linkedin: z.string().url().optional().or(z.literal("")),
+        portfolio: z.string().url().optional().or(z.literal("")),
+      })
+      .partial()
+      .optional(),
+  }),
+
+  price: z.string().min(1, "سعر الكشف مطلوب"),
+
+  // يمكن ربطه لاحقًا مع File أو object { url, public_id }
+  image: z.any().optional(),
+});
+
+export type DoctorCreateType = z.infer<typeof DoctorCreateSchema>;

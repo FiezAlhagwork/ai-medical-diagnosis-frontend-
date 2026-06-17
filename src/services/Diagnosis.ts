@@ -1,13 +1,13 @@
 import type { SymptomsType } from "../schema";
-import type { DiagnosisAllResponse, DiagnosisResponse } from "../types/Diagnosis";
+import type { DiagnosisAllResponse, DiagnosisResponseById } from "../types/Diagnosis";
 import { api } from "./api";
 
 export const createDiagnosis = (data: SymptomsType) => {
-  return api.post<DiagnosisResponse>("/api/diagnosis", data);
+  return api.post<DiagnosisResponseById>("/api/diagnosis", data);
 };
 
 export const getDiagnosisByID = (id: string) => {
-  return api.get<DiagnosisResponse>(`/api/diagnosis/${id}`);
+  return api.get<DiagnosisResponseById>(`/api/diagnosis/${id}`);
 };
 
 export const getAllDiagnosis = () => {

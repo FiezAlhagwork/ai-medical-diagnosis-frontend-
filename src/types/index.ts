@@ -163,3 +163,20 @@ export type EmptyStateProps = {
   onAction?: () => void;
   className?: string;
 };
+
+export type SpecialtyStats = {
+  specialty: string;
+  count: number;
+}
+
+export type SpecialtyStatsResponse = {
+  message: string,
+  error: boolean,
+  data: SpecialtyStats[]
+}
+
+
+export type DashboardState = { totalUsers: number, totalDoctors: number, totalDiagnoses: number, todayDiagnoses: number }
+
+
+

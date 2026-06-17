@@ -76,7 +76,7 @@ const SymptomsPage = () => {
       setLoading(true)
       const res = await createDiagnosis(data);
       if (res.data && !res.error) {
-        setDiagnosis(res)
+        setDiagnosis(res.data)
         navigate(`/diagnosis/${res.data._id}`)
       }
 

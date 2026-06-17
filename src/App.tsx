@@ -16,6 +16,8 @@ import ManageDoctor from "./pages/Admin/ManageDoctor";
 import ManageUser from "./pages/Admin/ManageUser";
 import { DiagnosisProvider } from "./context/DiagnosisContext";
 import { AuthProvider } from "./context/AuthContext";
+import CreateDoctor from "./pages/Admin/CreateDoctor";
+import Dashboard from "./pages/Admin/Dashboard";
 
 function App() {
   return (
@@ -38,18 +40,15 @@ function App() {
                   <Route path="/diagnosis/:id" element={<Diagnosis />} />
                 </Route>
               </Route>
-              
+
               <Route element={<ProtectedRoute role="admin" />}>
                 <Route path="/admin" element={<AdminDashboard />}>
+                  <Route path="dashboard" element={<Dashboard />} />
                   <Route path="manageDoctor" element={<ManageDoctor />} />
                   <Route path="manageUser" element={<ManageUser />} />
+                  <Route path="createDoctor" element={<CreateDoctor />} />
                 </Route>
               </Route>
-
-
-
-
-
             </Routes>
           </Router>
         </div>

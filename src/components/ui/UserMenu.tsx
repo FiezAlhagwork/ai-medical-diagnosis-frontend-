@@ -7,6 +7,9 @@ const UserMenu = () => {
     const { user, logout } = useAuth();
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
+
+    const dashboardPath =
+        user?.role === "admin" ? "/admin" : "/profile";
     return (
         <div className="relative">
             {/* Trigger */}
@@ -24,11 +27,16 @@ const UserMenu = () => {
             {open && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-50">
                     <Link
-                        to="/profile"
+                        to={dashboardPath}
                         className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => setOpen(false)}
                     >
-                        الملف الشخصي
+                        {
+                            user?.role === "admin"
+                                ? "لوحة التحكم"
+                                : "الملف الشخصي"
+                        }
+
                     </Link>
 
                     <Link

@@ -1,59 +1,61 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CiStethoscope } from "react-icons/ci";
 import Title from "../ui/Title";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { useTranslation } from "react-i18next";
-import type { Doctor } from "../../types";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import DoctorCard from "../ui/DoctorCard";
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos, MdSearch } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { getTopRated } from "../../services/Doctor";
+import type { Doctor } from "../../types/Doctor";
+import Loading from "../ui/Loading";
+
 
 
 const DistinguishedDoctorsSection = () => {
     const { t } = useTranslation("landing")
-    const DoctorData: Doctor[] = [
-        {
-            id: 1,
-            name: "فايز الحاج",
-            image:
-                "https://res.cloudinary.com/dnxc7gwpq/image/upload/v1763899142/doctors/a2_gmail_com/profile-1763899142349.jpg",
-            province: "دمشق",
-            rating: 4.5,
-            specialty: "القلب والاوعية الدموية",
-        },
-        {
-            id: 2,
-            name: "خالد العلي",
-            image:
-                "https://res.cloudinary.com/dnxc7gwpq/image/upload/v1763899142/doctors/a2_gmail_com/profile-1763899142349.jpg",
-            province: "دمشق",
-            rating: 4.7,
-            specialty: "طب أسنان",
-        },
-        {
-            id: 3,
-            name: "محمد الحاج",
-            image:
-                "https://res.cloudinary.com/dnxc7gwpq/image/upload/v1763899142/doctors/a2_gmail_com/profile-1763899142349.jpg",
-            province: "دمشق",
-            rating: 3.9,
-            specialty: "أنف وأذن وحنجرة",
-        },
-        {
-            id: 4,
-            name: "محمود ياسين ",
-            image:
-                "https://res.cloudinary.com/dnxc7gwpq/image/upload/v1763899142/doctors/a2_gmail_com/profile-1763899142349.jpg",
-            province: "دمشق",
-            rating: 4.2,
-            specialty: "أمراض معدية",
-        },
-    ];
+    const [doctors, setDoctors] = useState<Doctor[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const fetchDoctors = async () => {
+        try {
+            setLoading(true);
+            setError("");
+
+            const res = await getTopRated()
+            if (!res.error) {
+                setDoctors(res.doctors);
+
+            }
+
+        } catch (err: any) {
+            setError(
+                err?.response?.data?.message || "حدث خطأ غير متوقع"
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchDoctors()
+    }, [])
+
+
+
+    if (loading) {
+        return <Loading title="...جاري تحميل الأطباء" icon={MdSearch} />;
+    }
+
     return (
         <section className="relative z-10  py-16 md:py-20 bg-[#EBF5FF]">
             <div className="container_custom px-4 relative">
@@ -98,9 +100,9 @@ const DistinguishedDoctorsSection = () => {
                     onSlideChange={() => console.log("slide change")}
                     className="relative"
                 >
-                    {DoctorData.map((item) => {
+                    {doctors.map((item) => {
                         return (
-                            <SwiperSlide key={item.id}>
+                            <SwiperSlide key={item._id}>
                                 <DoctorCard item={item} />
                             </SwiperSlide>
                         );

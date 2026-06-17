@@ -35,7 +35,7 @@ const Diagnosis = () => {
         const res = await getDiagnosisByID(id);
 
         if (!res.error) {
-          setDiagnosis(res);
+          setDiagnosis(res.data);
         } else {
           setError(res.message || "Failed to load diagnosis");
         }
@@ -97,9 +97,9 @@ const Diagnosis = () => {
             الأعراض المبلغ عنها
           </h3>
           <div className=" ms-5 mt-3">
-            <p className="text-lg font-semibold">{diagnosis.data.symptomsText}</p>
+            <p className="text-lg font-semibold">{diagnosis.symptomsText}</p>
             <ul className="flex flex-wrap gap-3 mt-5">
-              {diagnosis.data.quickSymptoms.map((item, idx) => {
+              {diagnosis.quickSymptoms.map((item, idx) => {
                 return (
                   <li className="bg-emerald-600 py-2 px-3 text-white  rounded-2xl font-medium" key={idx}>
                     {t(`quickSymptoms.${item}`)}
@@ -119,27 +119,27 @@ const Diagnosis = () => {
             <div>
               <p className="text-gray-600 text-lg ">الحالة المحتملة</p>
               <p className="text-lg font-semibold text-gray-800">
-                بناءً على أعراضك،  تعاني من {diagnosis.data.possible_condition}
+                بناءً على أعراضك،  تعاني من {diagnosis.possible_condition}
               </p>
             </div>
 
             <div>
               <p className="text-gray-500 text-lg ">الاختصاص المناسب</p>
               <p className="text-lg font-semibold">
-                {diagnosis.data.matchedSpecialty}
+                {diagnosis.matchedSpecialty}
               </p>
             </div>
 
             <div className="mt-4 px-2">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-500 text-lg">مستوى الثقة</span>
-                <span className=" text-xl md:text-2xl font-semibold text-primary">{diagnosis.data.confidence}</span>
+                <span className=" text-xl md:text-2xl font-semibold text-primary">{diagnosis.confidence}</span>
               </div>
 
               <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-emerald-600 rounded-full transition-all duration-500"
-                  style={{ width: `${diagnosis.data.confidence}` }}
+                  style={{ width: `${diagnosis.confidence}` }}
                 />
               </div>
             </div>
@@ -147,7 +147,7 @@ const Diagnosis = () => {
             <div className="">
               <p className=" text-gray-500  text-lg my-2">الإجراءات الموصى بها</p>
               <ul className="flex flex-col gap-2">
-                {splitNextSteps(diagnosis.data.next_step).map((item, idx) => {
+                {splitNextSteps(diagnosis.next_step).map((item, idx) => {
                   return (
                     <li key={idx} className="flex items-center gap-2 font-semibold">
                       <div className="bg-blue-50 text-blue-500 p-2  rounded-4xl ">
@@ -163,7 +163,7 @@ const Diagnosis = () => {
             <div className="bg-red-50 border border-red-200 p-4 rounded-xl">
               <p className="font-semibold text-lg text-red-600  mb-1">نصيحة مهمة</p>
               <p className="text-red-700 text-sm leading-relaxed">
-                {diagnosis.data.advice}
+                {diagnosis.advice}
               </p>
             </div>
 
@@ -175,7 +175,7 @@ const Diagnosis = () => {
               <BsFillPeopleFill size={26} className="text-emerald-600 mt-1" />
               المتخصصون المقترحون</h3>
             <div className=" ">
-              <h1 className=" text-lg font-semibold ">{diagnosis.data.matchedSpecialty}</h1>
+              <h1 className=" text-lg font-semibold ">{diagnosis.matchedSpecialty}</h1>
               <p className="text-sm text-gray-500  my-3 ">للتقييم والعلاج العام</p>
             </div>
             <Button onClick={() => setShowDoctors(true)} icon={<GoArrowRight size={22} className="mt-1.5" />}>عرض الاطباء</Button>
@@ -184,7 +184,7 @@ const Diagnosis = () => {
 
         {showDoctors &&
           <DoctorResults
-            specialty={diagnosis.data.matchedSpecialty}
+            specialty={diagnosis.matchedSpecialty}
             city={user?.city}
             province={user?.province}
           />}
