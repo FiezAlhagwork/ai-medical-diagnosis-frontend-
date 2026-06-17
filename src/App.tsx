@@ -1,57 +1,101 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/SignUp";
-import Symptoms from "./pages/User/Symptoms";
-import Profile from "./pages/User/Profile";
-import Doctors from "./pages/User/Doctors";
-import DoctorProfile from "./pages/User/DoctorProfile";
-import Diagnosis from "./pages/User/Diagnosis";
+
 import Layout from "./components/layouts/Layout";
-import Landing from "./pages/User/Landing";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import AdminDashboard from "./pages/Admin/AdminDashboard";
-import ManageDoctor from "./pages/Admin/ManageDoctor";
-import ManageUser from "./pages/Admin/ManageUser";
+
 import { DiagnosisProvider } from "./context/DiagnosisContext";
 import { AuthProvider } from "./context/AuthContext";
-import CreateDoctor from "./pages/Admin/CreateDoctor";
-import Dashboard from "./pages/Admin/Dashboard";
+
+// Lazy Loaded Pages
+const Login = lazy(() => import("./pages/Auth/Login"));
+const SignUp = lazy(() => import("./pages/Auth/SignUp"));
+
+const Landing = lazy(() => import("./pages/User/Landing"));
+const Profile = lazy(() => import("./pages/User/Profile"));
+const Symptoms = lazy(() => import("./pages/User/Symptoms"));
+const Doctors = lazy(() => import("./pages/User/Doctors"));
+const DoctorProfile = lazy(() => import("./pages/User/DoctorProfile"));
+const Diagnosis = lazy(() => import("./pages/User/Diagnosis"));
+
+const AdminDashboard = lazy(
+  () => import("./pages/Admin/AdminDashboard")
+);
+const Dashboard = lazy(
+  () => import("./pages/Admin/Dashboard")
+);
+const ManageDoctor = lazy(
+  () => import("./pages/Admin/ManageDoctor")
+);
+const ManageUser = lazy(
+  () => import("./pages/Admin/ManageUser")
+);
+const CreateDoctor = lazy(
+  () => import("./pages/Admin/CreateDoctor")
+);
 
 function App() {
   return (
     <AuthProvider>
       <DiagnosisProvider>
-        <div>
-          <Router>
+        <Router>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-screen">
+                Loading...
+              </div>
+            }
+          >
             <Routes>
+              {/* Auth Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/signUp" element={<SignUp />} />
 
-              {/* Users Routes */}
+              {/* User Routes */}
               <Route element={<Layout />}>
                 <Route path="/" element={<Landing />} />
+
                 <Route element={<ProtectedRoute />}>
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/symptoms" element={<Symptoms />} />
                   <Route path="/doctors" element={<Doctors />} />
                   <Route path="/doctor/:id" element={<DoctorProfile />} />
-                  <Route path="/diagnosis/:id" element={<Diagnosis />} />
+                  <Route
+                    path="/diagnosis/:id"
+                    element={<Diagnosis />}
+                  />
                 </Route>
               </Route>
 
+              {/* Admin Routes */}
               <Route element={<ProtectedRoute role="admin" />}>
-                <Route path="/admin" element={<AdminDashboard />}>
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="manageDoctor" element={<ManageDoctor />} />
-                  <Route path="manageUser" element={<ManageUser />} />
-                  <Route path="createDoctor" element={<CreateDoctor />} />
+                <Route
+                  path="/admin"
+                  element={<AdminDashboard />}
+                >
+                  <Route
+                    path="dashboard"
+                    element={<Dashboard />}
+                  />
+                  <Route
+                    path="manageDoctor"
+                    element={<ManageDoctor />}
+                  />
+                  <Route
+                    path="manageUser"
+                    element={<ManageUser />}
+                  />
+                  <Route
+                    path="createDoctor"
+                    element={<CreateDoctor />}
+                  />
                 </Route>
               </Route>
             </Routes>
-          </Router>
-        </div>
+          </Suspense>
+        </Router>
       </DiagnosisProvider>
     </AuthProvider>
   );
